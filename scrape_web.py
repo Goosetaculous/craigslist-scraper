@@ -4,7 +4,6 @@ from selenium import webdriver
 import time
 
 
-
 #Actual web scraping
 class WebScrape(object):
 
