@@ -42,14 +42,16 @@ class WebScrape(object):
         return xpath
 
     def clist(self):
-        driver = webdriver.Chrome('/Users/goose/Downloads/chromedriver')
-        driver.get('https://www.industry.co')
+        driver = webdriver.Chrome('./driver/chromedriver')
+        # driver/chromedriver
 
-        time.sleep(5)
+        driver.get('https://www.facebook.com')
+
+        time.sleep(3)
         search_box = driver.find_element_by_name('email')
-        search_box.send_keys('josephtrop@gmail.com')
-        search_box = driver.find_element_by_name('password')
-        search_box.send_keys('P)o9I*u7')
+        search_box.send_keys('josephtrop@yahoo.com')
+        search_box = driver.find_element_by_name('pass')
+        search_box.send_keys('q1w2e3r4')
 
 
         search_box.submit()
