@@ -31,10 +31,8 @@ if __name__ == "__main__":
     Args:
         param1: City.
         param2: Job site parameter from the URL.
-
     Returns:
         Run the methods from the class.
-
     Raises:
         KeyError: Raises an exception.
     """
