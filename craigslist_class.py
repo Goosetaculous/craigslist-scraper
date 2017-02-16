@@ -40,5 +40,3 @@ if __name__ == "__main__":
     """
     test =craigslistAPI(city='sandiego' , category='fbh')
     test.get_results( test.call_craigslist_JOBS() )
-
-
