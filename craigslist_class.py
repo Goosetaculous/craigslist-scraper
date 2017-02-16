@@ -4,23 +4,34 @@ from craigslist import CraigslistJobs
 
 class craigslistAPI(object):
 
-    # Constructor
-    # Initialize the city and the category
+
     def __init__(self,**kwargs):
+        """
+        Constructor
+        :param kwargs:
+        """
         self.city = kwargs['city']
         self.category = kwargs['category']
 
-    # Call the API and
-    # Return: results
+
     def call_craigslist_JOBS(self):
+        """
+        Call the craigslist API with the city and category given
+        by the constructor
+        :return:
+        """
         cl = CraigslistJobs(site=self.city, category=self.category)
         results =cl.get_results(sort_by='newest', geotagged=False, limit=30)
         return results
 
-    # Traverse the results
-    # TEST FUNCTION
-    # Return : Dictionary of each Ad
+
+
     def get_results(self,results):
+        """
+        Test Method to see the result of the craigslist API
+        :param results:
+        :return: Print the result
+        """
         for result in results:
             print result
 

@@ -1,9 +1,18 @@
 from scrape_result import Results
-import thread
+import threading
 
 CITIES = ['sandiego','lasvegas','losangeles']
-CL_PARAM = 'fbh'
-HTML_ELEM = ''
-HTML_ITTR = ''
-HTML_ATTR_NAME = ''
 
+HTML_ELEM = 'section'
+HTML_ATTR = 'id'
+HTML_ATTR_NAME = 'postingbody'
+
+work = Results(city='lasvegas',
+               category='fbh',
+               html=HTML_ELEM,
+               attr =HTML_ATTR,
+               attr_name=HTML_ATTR_NAME)
+work.traverseDictionary()
+
+
+#TODO:  https://lasvegas.craigslist.org/reply/lvg/fbh/6005412700  LINK FOR THE REPLY BUTTON
