@@ -26,7 +26,19 @@ class craigslistAPI(object):
 
 
 if __name__ == "__main__":
-    test =craigslistAPI(city='lasvegas',category='fbh')
+    """
+    This is a test run for this class.
+    Args:
+        param1: City.
+        param2: Job site parameter from the URL.
+
+    Returns:
+        Run the methods from the class.
+
+    Raises:
+        KeyError: Raises an exception.
+    """
+    test =craigslistAPI(city='sandiego' , category='fbh')
     test.get_results( test.call_craigslist_JOBS() )
 
 

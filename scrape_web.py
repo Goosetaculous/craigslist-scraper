@@ -21,15 +21,14 @@ class WebScrape(object):
         page = requests.get(self.url)
         tree = html.fromstring(page.content)
         val = self.stringyfy( tree.xpath(self.get_xpath(**kwargs) ) )
-        print val
+        return val
 
     # Clean Xpath result
     # Params: list of results
     # Return: Stringify
     def stringyfy (self,list):
         str = ''.join(list)
-        str = str.replace("\n", " ")
-
+        #str = str.replace("\n", " ")
         return str
 
     # Build the xpath
@@ -43,17 +42,12 @@ class WebScrape(object):
 
     def clist(self):
         driver = webdriver.Chrome('./driver/chromedriver')
-        # driver/chromedriver
-
         driver.get('https://www.facebook.com')
-
         time.sleep(3)
         search_box = driver.find_element_by_name('email')
         search_box.send_keys('josephtrop@yahoo.com')
         search_box = driver.find_element_by_name('pass')
         search_box.send_keys('q1w2e3r4')
-
-
         search_box.submit()
         time.sleep(20)  # Let the user actually see something!
        # driver.quit()
