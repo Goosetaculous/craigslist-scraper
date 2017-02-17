@@ -21,25 +21,33 @@ class WebScrape(object):
     # Get the page content
     # Params: html element, attribute, and value through kwars
     # Return: Atomic values
-    def get_Page_Content(self,**kwargs):
-        self.get_reply_url()
-        page = requests.get(self.url)
+    def get_Page_Content(self,type,**kwargs):
+        """
+        :param kwargs,
+        :return: Return the posting body
+        """
+        url=self.url
+        if type == "reply":
+            url=self.get_reply_url()
+
+        page = requests.get(url)
         tree = html.fromstring(page.content)
         val = self.stringyfy( tree.xpath(self.get_xpath(**kwargs) ) )
         return val
 
+
     def get_reply_url(self):
+        """
+        :return: Return the reply url of the ad
+        """
         replyURL= UserString.MutableString(self.url)
         del replyURL[replyURL.find('/fbh')-1]
         del replyURL[replyURL.find('/fbh') - 1]
         del replyURL[replyURL.find('/fbh') - 1]
         replyURL = str(replyURL)
         replacewith = self.get_city_cl_code(self.city)
-
         replyURL =  str(replyURL.replace(".org/",".org/reply/"+replacewith ).replace(".html",""))
-        print (replyURL)
-
-
+        return (replyURL)
 
 
     def stringyfy(self,list):
@@ -83,16 +91,22 @@ class WebScrape(object):
         search_box = driver.find_element_by_name('pass')
         search_box.send_keys('q1w2e3r4')
         search_box.submit()
-        time.sleep(20)  # Let the user actually see something!
+        time.sleep(2)  # Let the user actually see something!
+        search_box =  driver.find_element_by_class_name('_1frb')
+        search_box.send_keys('Cody Barbo')
+        search_box.submit()
+
+        time.sleep(5)
+        driver.get('https://www.facebook.com/search/str/Chef Groups/keywords_top')
+        time.sleep(10)
+
        # driver.quit()
-
-
-
-
+       # https: // www.facebook.com / search / str / Cody + Barbo / keywords_top
 
 if __name__ == "__main__":
-    WebScrape(url="https://sandiego.craigslist.org/nsd/fbh/5995669616.html").clist()
-        #.get_Page_Content(html_elem="section", attr="id", attr_name="postingbody")
+    WebScrape(url="http://www.babynames.com/Names/A/",city="none").get_Page_Content("x",html_elem="a", attr="class", attr_name="M")
+        #.clist()
+        #.get_Page_Content("x",html_elem="a", attr="class", attr_name="M")
 
 
 

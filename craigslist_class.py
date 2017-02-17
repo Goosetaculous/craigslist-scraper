@@ -21,7 +21,7 @@ class craigslistAPI(object):
         :return:
         """
         cl = CraigslistJobs(site=self.city, category=self.category)
-        results =cl.get_results(sort_by='newest', geotagged=False, limit=30)
+        results =cl.get_results(sort_by='newest', geotagged=False, limit=40)
         return results
 
 
