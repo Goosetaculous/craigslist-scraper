@@ -2,38 +2,72 @@ from lxml import html
 import requests
 from selenium import webdriver
 import time
+import UserString
 
 
 #Actual web scraping
 class WebScrape(object):
 
-    # Constructor
-    # Initialize the URL
-    # Return:  None
+
     def __init__(self, **kwargs):
+        """
+        Constructor
+        :param kwargs: html_elem,attr,attr_name,city,cl_id
+        """
         self.url = kwargs['url']
+        self.city = kwargs['city']
 
 
     # Get the page content
     # Params: html element, attribute, and value through kwars
     # Return: Atomic values
     def get_Page_Content(self,**kwargs):
+        self.get_reply_url()
         page = requests.get(self.url)
         tree = html.fromstring(page.content)
         val = self.stringyfy( tree.xpath(self.get_xpath(**kwargs) ) )
         return val
 
-    # Clean Xpath result
-    # Params: list of results
-    # Return: Stringify
-    def stringyfy (self,list):
+    def get_reply_url(self):
+        replyURL= UserString.MutableString(self.url)
+        del replyURL[replyURL.find('/fbh')-1]
+        del replyURL[replyURL.find('/fbh') - 1]
+        del replyURL[replyURL.find('/fbh') - 1]
+        replyURL = str(replyURL)
+        replacewith = self.get_city_cl_code(self.city)
+
+        replyURL =  str(replyURL.replace(".org/",".org/reply/"+replacewith ).replace(".html",""))
+        print (replyURL)
+
+
+
+
+    def stringyfy(self,list):
+        """
+        Get the posting body
+        :param list:
+        :return: Actual posting text
+        """
         str = ''.join(list)
         #str = str.replace("\n", " ")
         return str
 
-    # Build the xpath
-    # Return: Xpath
+    def get_city_cl_code(self,city):
+        """
+        Get Craigslist city code
+        :param city:
+        :return: craigslist city code
+        """
+        CITIES = {'sandiego':'sdo', 'lasvegas':'lvg', 'losangeles':'lax'} #nice trick for switch statement =)
+        return CITIES.get(city)
+
+
     def get_xpath(self, **kwargs):
+        """
+        Get the text between html tags
+        :param kwargs:
+        :return: text between <p>test</p>  -> test
+        """
         htmlElem = kwargs['html_elem']
         htmlAttr = kwargs['attr']
         attrName = kwargs['attr_name']
