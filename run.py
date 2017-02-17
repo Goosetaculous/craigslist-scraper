@@ -14,7 +14,3 @@ work = Results(city='losangeles',
                attr_name=HTML_ATTR_NAME)
 work.traverseDictionary()
 
-
-#TODO:  https://lasvegas.craigslist.org/reply/lvg/fbh/6005412700  LINK FOR THE REPLY BUTTON
-
-
