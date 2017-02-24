@@ -82,26 +82,7 @@ class WebScrape(object):
         xpath = '//'+ htmlElem+'[@'+htmlAttr+'="'+attrName+'"]/text()';
         return xpath
 
-    def clist(self):
-        driver = webdriver.Chrome('./driver/chromedriver')
-        driver.get('https://www.facebook.com')
-        time.sleep(3)
-        search_box = driver.find_element_by_name('email')
-        search_box.send_keys('josephtrop@yahoo.com')
-        search_box = driver.find_element_by_name('pass')
-        search_box.send_keys('q1w2e3r4')
-        search_box.submit()
-        time.sleep(2)  # Let the user actually see something!
-        search_box =  driver.find_element_by_class_name('_1frb')
-        search_box.send_keys('Cody Barbo')
-        search_box.submit()
 
-        time.sleep(5)
-        driver.get('https://www.facebook.com/search/str/Chef Groups/keywords_top')
-        time.sleep(10)
-
-       # driver.quit()
-       # https: // www.facebook.com / search / str / Cody + Barbo / keywords_top
 
 if __name__ == "__main__":
     WebScrape(url="http://www.babynames.com/Names/A/",city="none").get_Page_Content("x",html_elem="a", attr="class", attr_name="M")
