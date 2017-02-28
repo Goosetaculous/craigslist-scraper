@@ -1,12 +1,9 @@
 from lxml import html
 import requests
-from selenium import webdriver
-import time
 import UserString
 
-
-#Actual web scraping
 class WebScrape(object):
+
 
 
     def __init__(self, **kwargs):
@@ -18,9 +15,6 @@ class WebScrape(object):
         self.city = kwargs['city']
 
 
-    # Get the page content
-    # Params: html element, attribute, and value through kwars
-    # Return: Atomic values
     def get_Page_Content(self,type,**kwargs):
         """
         :param kwargs,
@@ -29,7 +23,6 @@ class WebScrape(object):
         url=self.url
         if type == "reply":
             url=self.get_reply_url()
-
         page = requests.get(url)
         tree = html.fromstring(page.content)
         val = self.stringyfy( tree.xpath(self.get_xpath(**kwargs) ) )
